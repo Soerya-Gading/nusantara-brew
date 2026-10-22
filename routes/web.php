@@ -66,3 +66,11 @@ Route::get('/kasir', [PageController::class, 'staffPos'])->name('staff.pos');
 Route::get('/admin', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/admin/toko', [PageController::class, 'adminShops'])->name('admin.shops');
 Route::get('/admin/pengguna', [PageController::class, 'adminUsers'])->name('admin.users');
+
+/*
+|--------------------------------------------------------------------------
+| Alat pengembangan
+|--------------------------------------------------------------------------
+| Indeks semua halaman untuk pemeriksaan tampilan. Hanya lokal/pengujian.
+*/
+Route::get('/peta', [PageController::class, 'sitemap'])->name('dev.sitemap');

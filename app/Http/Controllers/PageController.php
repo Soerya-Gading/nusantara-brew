@@ -405,6 +405,54 @@ class PageController extends Controller
         ];
     }
 
+    public function sitemap()
+    {
+        abort_unless(app()->environment('local', 'testing'), 404);
+
+        $groups = [
+            [
+                'title' => 'Publik & pelanggan',
+                'pages' => [
+                    ['name' => 'Beranda', 'url' => route('shops.index'), 'path' => '/', 'note' => 'Daftar kedai aktif'],
+                    ['name' => 'Detail kedai', 'url' => route('shops.show', 'kopi-lembur-bandung'), 'path' => '/toko/kopi-lembur-bandung', 'note' => 'Katalog menu + dialog detail'],
+                    ['name' => 'Masuk', 'url' => route('login'), 'path' => '/masuk', 'note' => 'Form nonaktif'],
+                    ['name' => 'Daftar', 'url' => route('register'), 'path' => '/daftar', 'note' => 'Form nonaktif'],
+                    ['name' => 'Keranjang kosong', 'url' => route('cart.index'), 'path' => '/keranjang', 'note' => 'Keadaan tanpa item'],
+                    ['name' => 'Keranjang berisi', 'url' => route('preview.cart'), 'path' => '/pratinjau/keranjang', 'note' => 'Data contoh'],
+                    ['name' => 'Checkout', 'url' => route('preview.checkout'), 'path' => '/pratinjau/checkout', 'note' => 'Data contoh'],
+                    ['name' => 'Pesanan', 'url' => route('orders.show'), 'path' => '/pesanan', 'note' => 'Timeline dan hitung mundur'],
+                    ['name' => 'Struk', 'url' => route('orders.receipt'), 'path' => '/pesanan/struk', 'note' => 'Siap cetak'],
+                    ['name' => 'Riwayat pesanan', 'url' => route('orders.history'), 'path' => '/riwayat', 'note' => 'Lintas kedai'],
+                ],
+            ],
+            [
+                'title' => 'Pemilik kedai',
+                'pages' => [
+                    ['name' => 'Ringkasan', 'url' => route('owner.dashboard'), 'path' => '/owner', 'note' => 'Metrik dan pesanan terbaru'],
+                    ['name' => 'Antrean pesanan', 'url' => route('owner.orders'), 'path' => '/owner/pesanan', 'note' => 'Tab per status'],
+                    ['name' => 'Katalog & stok', 'url' => route('owner.menu'), 'path' => '/owner/menu', 'note' => 'Tabel menu dan restock'],
+                    ['name' => 'Kategori', 'url' => route('owner.categories'), 'path' => '/owner/kategori', 'note' => 'Urutan dan arsip'],
+                    ['name' => 'Profil kedai', 'url' => route('owner.shop'), 'path' => '/owner/toko', 'note' => 'Info dan penerimaan pesanan'],
+                    ['name' => 'Penugasan staf', 'url' => route('owner.staff'), 'path' => '/owner/staf', 'note' => 'Tugaskan lewat email'],
+                    ['name' => 'Laporan', 'url' => route('owner.reports'), 'path' => '/owner/laporan', 'note' => 'Filter tanggal'],
+                ],
+            ],
+            [
+                'title' => 'Staf dan admin',
+                'pages' => [
+                    ['name' => 'Antrean staf', 'url' => route('staff.queue'), 'path' => '/staf', 'note' => 'Baru, dibuat, siap'],
+                    ['name' => 'Kasir', 'url' => route('staff.pos'), 'path' => '/kasir', 'note' => 'Keranjang interaktif'],
+                    ['name' => 'Riwayat kedai', 'url' => route('staff.history'), 'path' => '/staf/riwayat', 'note' => 'Pesanan selesai'],
+                    ['name' => 'Ringkasan platform', 'url' => route('admin.dashboard'), 'path' => '/admin', 'note' => 'Metrik dan pengajuan'],
+                    ['name' => 'Persetujuan kedai', 'url' => route('admin.shops'), 'path' => '/admin/toko', 'note' => 'Aktifkan/nonaktifkan'],
+                    ['name' => 'Manajemen pengguna', 'url' => route('admin.users'), 'path' => '/admin/pengguna', 'note' => 'Akun owner/staf'],
+                ],
+            ],
+        ];
+
+        return view('pages.index', compact('groups'));
+    }
+
     /**
      * Fixture tampilan. Backend menggantinya dengan order milik customer terautentikasi.
      */
