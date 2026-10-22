@@ -23,7 +23,7 @@
 
 ## Ringkasan
 
-Satu akun, banyak kedai. Pelanggan menjelajah katalog, menaruh menu ke keranjang, lalu checkout ke **satu kedai per pesanan** — aturan ini yang menjaga perhitungan pembayaran dan stok tetap sederhana. Di sisi lain, pemilik kedai mengelola katalog dan stafnya, barista menggerakkan antrean produksi, kasir melayani pesanan langsung di tempat, dan admin platform menyetujui kedai baru.
+Satu akun, banyak kedai. Pelanggan menjelajah katalog, menaruh menu ke keranjang, lalu checkout ke **satu kedai per pesanan** aturan ini yang menjaga perhitungan pembayaran dan stok tetap sederhana. Di sisi lain, pemilik kedai mengelola katalog dan stafnya, barista menggerakkan antrean produksi, kasir melayani pesanan langsung di tempat, dan admin platform menyetujui kedai baru.
 
 Proyek mata kuliah **Pengembangan Perangkat Lunak Web / Framework** yang dibangun dengan Laravel: MVC, relasi database, autentikasi, otorisasi berbasis peran, validasi, dan pengujian.
 
