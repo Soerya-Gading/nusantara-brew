@@ -1,0 +1,75 @@
+/**
+ * Nusantara Brew — Print Styles (print.css)
+ * Khusus untuk cetak struk digital (struk.html).
+ * Menyembunyikan navigasi, banner demo, dan tombol kontrol; menghasilkan cetakan bersih hitam-putih.
+ */
+
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  /* Sembunyikan elemen non-cetak */
+  .site-header,
+  .site-footer,
+  .receipt-actions,
+  .demo-banner,
+  .no-print,
+  button,
+  .btn,
+  #toast-container {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+  }
+
+  .receipt-page {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .receipt {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #000 !important;
+    background: transparent !important;
+    page-break-inside: avoid;
+  }
+
+  .receipt-header h1,
+  .receipt-shop,
+  .receipt-total strong {
+    color: #000 !important;
+  }
+
+  .table th, .table td {
+    border-bottom: 1px solid #ddd !important;
+    color: #000 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
+
+  .receipt-items th,
+  .receipt-items td {
+    border-bottom: 1px solid #999 !important;
+    color: #000 !important;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+}

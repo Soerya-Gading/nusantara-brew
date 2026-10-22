@@ -1,0 +1,11 @@
+.checkout-sections { display: grid; gap: var(--space-5); min-width: 0; }
+.checkout-options { border: 0; padding: 0; margin: var(--space-4) 0; display: grid; gap: var(--space-3); min-width: 0; }
+.checkout-options label { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; min-height: 44px; }
+.checkout-options label:has(input:checked) { border-color: var(--color-primary); background: var(--color-surface-hover); }
+.checkout-options input { margin-top: 4px; accent-color: var(--color-primary); flex-shrink: 0; }
+.checkout-options small { display: block; margin-top: var(--space-1); color: var(--color-ink-muted); line-height: 1.5; }
+.checkout-sections .form-group { margin-top: var(--space-4); }
+.checkout-sections textarea { resize: vertical; }
+#table-field[hidden] { display: none; }
+.cart-summary dt { overflow-wrap: anywhere; }
+.cart-summary dd { white-space: nowrap; }

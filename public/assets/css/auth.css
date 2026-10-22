@@ -1,0 +1,100 @@
+
+/* ─── Layout halaman auth (sama dengan login) ────────────────────────────── */
+.auth-card {
+    max-width: 440px;
+    margin: 0 auto var(--space-6);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.auth-brand {
+    margin-bottom: var(--space-6);
+}
+
+.auth-brand-link {
+    text-decoration: none;
+    color: var(--color-ink);
+}
+
+.auth-brand-link:hover {
+    text-decoration: none;
+    color: var(--color-ink);
+}
+
+.auth-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-ink);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-1);
+}
+
+.auth-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+    margin-bottom: var(--space-6);
+}
+
+/* ─── Dua kolom password di layar ≥ 480px ───────────────────────────────── */
+.auth-password-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+@media (min-width: 480px) {
+    .auth-password-row {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+    }
+}
+
+/* ─── Alert validasi ─────────────────────────────────────────────────────── */
+.alert {
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-4);
+}
+
+.alert-danger {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger-text);
+    border: 1px solid var(--color-danger-border);
+}
+
+/* ─── Input invalid ──────────────────────────────────────────────────────── */
+.form-control.is-invalid {
+    border-color: var(--color-danger-border);
+}
+
+.form-error {
+    font-size: var(--font-size-xs);
+    color: var(--color-danger-text);
+    margin-top: var(--space-1);
+}
+
+/* ─── Tautan silang ──────────────────────────────────────────────────────── */
+.auth-switch {
+    margin-top: var(--space-5);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-ink-muted);
+}
+
+.auth-switch a {
+    color: var(--color-primary);
+    margin-left: var(--space-1);
+}
+
+/* ─── Responsif ──────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: var(--space-6) var(--space-5);
+    }
+}
+
+.auth-card input { min-width: 0; }
+.auth-card .btn { min-height: 44px; }

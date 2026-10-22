@@ -1,0 +1,46 @@
+.order-page { display: flex; flex-direction: column; gap: var(--space-5); padding-top: var(--space-5); }
+.order-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.order-heading h1 { font-size: clamp(1.4rem, 4vw, 2rem); letter-spacing: -.01em; margin-bottom: var(--space-1); }
+.order-eyebrow { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--color-ink-muted); }
+.order-layout { display: grid; gap: var(--space-5); grid-template-columns: 1fr; min-width: 0; }
+@media (min-width: 900px) { .order-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); align-items: start; } }
+.order-panel { padding: var(--space-5); min-width: 0; }
+.order-panel h2 { font-size: 1.1rem; margin-bottom: var(--space-4); }
+.order-subheading { font-size: .95rem; margin: var(--space-5) 0 var(--space-2); }
+.order-payment { padding: var(--space-5); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); border-left: 3px solid var(--color-accent); }
+.order-payment h2 { font-size: 1.1rem; margin-bottom: var(--space-2); }
+.order-simulation-note { font-size: var(--font-size-xs); color: var(--color-ink-muted); margin-top: var(--space-2); }
+#payment-countdown { font-variant-numeric: tabular-nums; color: var(--color-primary); }
+#payment-countdown.is-expired { color: var(--color-danger-text); }
+.order-meta { display: grid; gap: var(--space-2); }
+.order-meta > div { display: flex; justify-content: space-between; gap: var(--space-4); font-size: var(--font-size-sm); }
+.order-meta dt { color: var(--color-ink-muted); }
+.order-meta dd { margin: 0; text-align: right; font-weight: 500; overflow-wrap: anywhere; }
+.order-items { list-style: none; margin: 0; padding: 0; }
+.order-items li { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); font-size: var(--font-size-sm); }
+.order-items li:last-child { border-bottom: 0; }
+.order-items li > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.order-items li > span:last-child { white-space: nowrap; }
+.order-total { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) 0; margin-top: var(--space-3); border-top: 1px solid var(--color-border); }
+.order-total strong { font-size: 1.15rem; color: var(--color-primary); }
+.order-panel .btn-block { min-height: 44px; }
+
+/* Struk */
+.receipt-page { padding-block: var(--space-5); max-width: 720px; }
+.receipt-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5); }
+.receipt { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: clamp(20px, 5vw, 40px); }
+.receipt-header { border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-4); margin-bottom: var(--space-4); }
+.receipt-header h1 { font-size: 1.15rem; letter-spacing: .02em; margin-bottom: var(--space-2); }
+.receipt-shop { font-weight: 600; }
+.receipt-address { font-size: var(--font-size-sm); color: var(--color-ink-muted); }
+.receipt-meta { display: grid; gap: var(--space-2); margin-bottom: var(--space-4); font-size: var(--font-size-sm); }
+.receipt-meta > div { display: flex; justify-content: space-between; gap: var(--space-4); }
+.receipt-meta dt { color: var(--color-ink-muted); }
+.receipt-meta dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.receipt-items { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+.receipt-items th, .receipt-items td { text-align: left; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.receipt-items th:nth-child(2), .receipt-items td:nth-child(2) { text-align: center; width: 48px; }
+.receipt-items th:last-child, .receipt-items td:last-child { text-align: right; white-space: nowrap; }
+.receipt-note { display: block; font-size: var(--font-size-xs); color: var(--color-ink-muted); font-style: italic; }
+.receipt-total { display: flex; justify-content: space-between; gap: var(--space-4); padding-top: var(--space-4); margin-top: var(--space-2); font-size: 1.05rem; }
+.receipt-footnote { margin-top: var(--space-5); font-size: var(--font-size-xs); color: var(--color-ink-muted); line-height: 1.6; }

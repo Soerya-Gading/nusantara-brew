@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Nusantara Brew — satu platform untuk semua rasa lokal">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2B1D14"/>
+      <stop offset="55%" stop-color="#4A2F1E"/>
+      <stop offset="100%" stop-color="#6F4E37"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C68B59"/>
+      <stop offset="100%" stop-color="#E8C39E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C68B59" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#C68B59" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <circle cx="1010" cy="80" r="220" fill="url(#glow)"/>
+  <circle cx="150" cy="270" r="180" fill="url(#glow)"/>
+
+  <g opacity="0.14" fill="none" stroke="#E8C39E" stroke-width="2">
+    <ellipse cx="980" cy="210" rx="26" ry="38" transform="rotate(-28 980 210)"/>
+    <path d="M968 190c10 14 10 26 0 40" />
+    <ellipse cx="1060" cy="140" rx="18" ry="26" transform="rotate(22 1060 140)"/>
+    <ellipse cx="905" cy="120" rx="14" ry="20" transform="rotate(-12 905 120)"/>
+  </g>
+
+  <g transform="translate(88 92)">
+    <rect x="0" y="0" width="64" height="64" rx="16" fill="url(#accent)"/>
+    <text x="32" y="42" text-anchor="middle" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#2B1D14">NB</text>
+
+    <text x="88" y="30" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#FFFDFB" letter-spacing="-1">Nusantara Brew</text>
+    <text x="88" y="68" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="19" fill="#E8C39E">Satu platform untuk semua rasa lokal</text>
+
+    <line x1="88" y1="96" x2="420" y2="96" stroke="url(#accent)" stroke-width="2" opacity="0.5"/>
+
+    <text x="88" y="128" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="16" fill="#D9C6B4">
+      Pemesanan kopi lintas kedai · pickup &amp; dine-in · multi-tenant
+    </text>
+    <text x="88" y="154" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="16" fill="#B79C86">
+      Laravel 13 · Blade · MySQL · RBAC 4 peran
+    </text>
+  </g>
+</svg>
