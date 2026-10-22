@@ -102,7 +102,7 @@ Isolasi tenant ditegakkan di dua lapis: middleware peran pada route, dan pemerik
 | Framework | Laravel 13 · PHP 8.5 |
 | Tampilan | Blade · CSS kustom berbasis design token · JavaScript tanpa framework |
 | Database | MySQL 8 (Eloquent + migration) |
-| Pengujian | PHPUnit — feature test per halaman |
+| Pengujian | PHPUnit, feature test per halaman |
 | Alat bantu | Composer · Artisan · Git |
 
 CSS ditulis manual di `public/assets/css` dengan variabel warna terpusat (`tokens.css`), bukan utility framework, agar mudah ditinjau saat presentasi.
