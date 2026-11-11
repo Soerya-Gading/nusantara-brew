@@ -34,12 +34,29 @@
                 <h2 id="payment-title">Selesaikan pembayaran</h2>
                 <p class="text-sm text-muted">
                     Metode: {{ $order->payment_method === 'cash' ? 'Tunai di kasir' : 'QRIS simulasi' }}.
-                    Sisa waktu <strong id="payment-countdown" data-expires-at="{{ $order->expires_at->toIso8601String() }}">15 menit</strong>.
+                    Sisa waktu <strong id="payment-countdown" data-expires-at="{{ $order->expires_at ? $order->expires_at->toIso8601String() : now()->addMinutes(15)->toIso8601String() }}">15 menit</strong>.
                 </p>
                 <p class="order-simulation-note"><strong>SIMULASI PEMBAYARAN — bukan QRIS nyata.</strong> Tidak ada dana yang diproses.</p>
             </div>
-            {{-- Aktifkan setelah route pembayaran backend tersedia. --}}
-            <button type="button" class="btn btn-primary" disabled>Simulasikan pembayaran berhasil</button>
+            <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;">
+                @if(request()->routeIs('preview.*') || !isset($order->id))
+                    <button type="button" class="btn btn-primary" disabled>Simulasikan pembayaran berhasil</button>
+                @else
+                    @if($order->payment_method === 'qris_simulation')
+                        <form method="POST" action="{{ route('orders.pay', $order->id) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Simulasikan pembayaran berhasil</button>
+                        </form>
+                    @else
+                        <p class="badge badge-warning" style="margin:0;">Silakan bayar tunai di kasir kedai</p>
+                    @endif
+                    <form method="POST" action="{{ route('orders.cancel', $order->id) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary">Batalkan pesanan</button>
+                    </form>
+                    <!-- disabled -->
+                @endif
+            </div>
         </section>
     @endif
 
@@ -90,7 +107,7 @@
             @endif
 
             <div class="order-total"><span>Total</span><strong>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</strong></div>
-            <a href="{{ route('orders.receipt') }}" class="btn btn-secondary btn-block">Lihat struk</a>
+            <a href="{{ route('orders.receipt', ['order_code' => $order->order_code]) }}" class="btn btn-secondary btn-block">Lihat struk</a>
         </section>
     </div>
 </div>

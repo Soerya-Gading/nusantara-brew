@@ -89,6 +89,7 @@
 
                             <button type="button" class="menu-detail-trigger"
                                     data-menu-dialog
+                                    data-id="{{ $menu->id }}"
                                     data-name="{{ $menu->name }}"
                                     data-description="{{ $menu->description }}"
                                     data-price="Rp {{ number_format($menu->price, 0, ',', '.') }}"
@@ -109,8 +110,26 @@
         @endforelse
     </section>
 
+    @if(session('conflict_shop'))
+        <div class="card" style="margin-bottom:var(--space-4);background:#fff3cd;border:1px solid #ffeeba;padding:var(--space-4);">
+            <h3 style="color:#856404;margin-top:0;">Ganti Kedai?</h3>
+            <p>{{ session('conflict_shop')['message'] }}</p>
+            <form method="POST" action="{{ route('cart.switch-shop') }}" style="display:inline;">
+                @csrf
+                <input type="hidden" name="menu_id" value="{{ session('conflict_shop')['menu_id'] }}">
+                <input type="hidden" name="quantity" value="{{ session('conflict_shop')['quantity'] }}">
+                <input type="hidden" name="note" value="{{ session('conflict_shop')['note'] }}">
+                <button type="submit" class="btn btn-primary btn-sm">Ya, kosongkan keranjang & pesan dari kedai ini</button>
+            </form>
+            <a href="{{ url()->current() }}" class="btn btn-secondary btn-sm" style="margin-left:var(--space-2);">Batal</a>
+        </div>
+    @endif
+
     <dialog class="menu-dialog" id="menu-dialog" aria-labelledby="menu-dialog-name">
-        <div class="menu-dialog-inner">
+        <form method="POST" action="{{ route('cart.items.store') }}" class="menu-dialog-inner">
+            @csrf
+            <input type="hidden" name="menu_id" id="menu-dialog-id" value="">
+            <input type="hidden" name="quantity" value="1">
             <button type="button" class="menu-dialog-close" id="menu-dialog-close" aria-label="Tutup detail menu">&times;</button>
             <h3 id="menu-dialog-name" class="menu-dialog-name"></h3>
             <p id="menu-dialog-description" class="menu-dialog-description"></p>
@@ -118,11 +137,15 @@
                 <strong id="menu-dialog-price" class="menu-dialog-price"></strong>
                 <span id="menu-dialog-stock" class="menu-stock-tag"></span>
             </div>
+            <div class="form-group" style="margin-top:var(--space-3);margin-bottom:var(--space-3);">
+                <label for="menu-dialog-note-input" class="form-label" style="font-size:var(--font-size-xs);">Catatan pesanan (opsional)</label>
+                <input type="text" name="note" id="menu-dialog-note-input" class="form-control" placeholder="Contoh: Tanpa gula, es sedikit" maxlength="500">
+            </div>
             <p id="menu-dialog-note" class="menu-dialog-note" hidden>Menu ini sedang tidak tersedia.</p>
-            {{-- Aktifkan setelah keranjang backend tersedia. --}}
-            <button type="button" class="btn btn-primary btn-block" id="menu-dialog-add" disabled>Tambah ke keranjang</button>
+            <button type="submit" class="btn btn-primary btn-block" id="menu-dialog-add">Tambah ke keranjang</button>
+            <!-- disabled -->
             <p class="menu-dialog-hint">Keranjang hanya bisa memuat menu dari satu kedai.</p>
-        </div>
+        </form>
     </dialog>
 
 </div>

@@ -45,9 +45,18 @@
                     </span>
                     <strong>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</strong>
                 </div>
-                <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
-                    <a href="{{ route('orders.show') }}" class="btn btn-secondary btn-sm">Lihat detail</a>
-                    <button type="button" class="btn btn-primary btn-sm" disabled>{{ $tab['action'] }}</button>
+                <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;">
+                    <a href="{{ route('orders.show', ['order_code' => $order->order_code]) }}" class="btn btn-secondary btn-sm">Lihat detail</a>
+                    @if(isset($order->id))
+                        <form method="POST" action="{{ route('orders.status', $order->id) }}" style="display:inline;">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-primary btn-sm">{{ $tab['action'] }}</button>
+                        </form>
+                    @else
+                        <button type="button" class="btn btn-primary btn-sm" disabled>{{ $tab['action'] }}</button>
+                    @endif
+                    <!-- disabled -->
                 </div>
             </article>
         @empty

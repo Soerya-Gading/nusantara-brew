@@ -35,12 +35,11 @@
             Saat ini form menggunakan action="#" dan tombol disabled agar
             tidak mengirim data ke URL maupun endpoint palsu.
         --}}
+        <!-- onsubmit="return false;" disabled -->
         <form
             method="POST"
-            action="#"
+            action="{{ route('register.store') }}"
             id="register-form"
-            novalidate
-            onsubmit="return false;"
         >
             @csrf
 
@@ -59,7 +58,6 @@
                     autocomplete="name"
                     required
                     aria-describedby="reg-name-error"
-                    disabled
                 >
                 @error('name')
                     <span id="reg-name-error" class="form-error" role="alert">{{ $message }}</span>
@@ -81,7 +79,6 @@
                     autocomplete="email"
                     required
                     aria-describedby="reg-email-error"
-                    disabled
                 >
                 @error('email')
                     <span id="reg-email-error" class="form-error" role="alert">{{ $message }}</span>
@@ -103,7 +100,6 @@
                     autocomplete="tel"
                     required
                     aria-describedby="reg-phone-error"
-                    disabled
                 >
                 @error('phone')
                     <span id="reg-phone-error" class="form-error" role="alert">{{ $message }}</span>
@@ -122,11 +118,10 @@
                         id="reg-password"
                         name="password"
                         class="form-control @error('password') is-invalid @enderror"
-                        placeholder="Minimal 8 karakter"
+                        placeholder="Minimal 6 karakter"
                         autocomplete="new-password"
                         required
                         aria-describedby="reg-password-error"
-                        disabled
                     >
                     @error('password')
                         <span id="reg-password-error" class="form-error" role="alert">{{ $message }}</span>
@@ -146,7 +141,6 @@
                         autocomplete="new-password"
                         required
                         aria-describedby="reg-password-confirm-error"
-                        disabled
                     >
                     @error('password_confirmation')
                         <span id="reg-password-confirm-error" class="form-error" role="alert">{{ $message }}</span>
@@ -154,15 +148,9 @@
                 </div>
             </div>
 
-            {{--
-                Tombol dinonaktifkan (disabled) sampai POST route dan controller
-                autentikasi tersedia. Hapus atribut `disabled` saat integrasi.
-            --}}
             <button
                 type="submit"
                 class="btn btn-primary btn-block btn-lg"
-                disabled
-                aria-disabled="true"
                 style="margin-top: var(--space-2);"
             >
                 Buat Akun

@@ -9,9 +9,44 @@
         <h1 class="page-title">Katalog &amp; stok</h1>
         <p class="page-subtitle">Stok menunjukkan porsi yang masih bisa dijual, bukan bahan baku.</p>
     </div>
-    {{-- Aktifkan setelah route penyimpanan menu tersedia. --}}
-    <button type="button" class="btn btn-primary" disabled>Tambah menu</button>
+    <!-- disabled -->
+    <button type="button" class="btn btn-primary" onclick="document.getElementById('add-menu-dialog').showModal()">Tambah menu</button>
 </header>
+
+<dialog id="add-menu-dialog" style="padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--color-border);max-width:500px;width:100%;">
+    <form method="POST" action="{{ route('owner.menu.store') }}">
+        @csrf
+        <h3 style="margin-top:0;">Tambah Menu Baru</h3>
+        <div class="form-group">
+            <label class="form-label" for="menu-name">Nama Menu</label>
+            <input class="form-control" id="menu-name" name="name" required placeholder="Contoh: Kopi Tubruk">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="menu-category">Kategori</label>
+            <select class="form-control" id="menu-category" name="category_id" required>
+                @foreach($categories as $cat)
+                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="menu-price">Harga (Rp)</label>
+            <input class="form-control" id="menu-price" name="price" type="number" min="1" required placeholder="25000">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="menu-stock">Stok Awal (Porsi)</label>
+            <input class="form-control" id="menu-stock" name="stock" type="number" min="0" required value="10">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="menu-desc">Deskripsi</label>
+            <textarea class="form-control" id="menu-desc" name="description" rows="2" placeholder="Deskripsi menu..."></textarea>
+        </div>
+        <div style="display:flex;gap:var(--space-2);justify-content:flex-end;margin-top:var(--space-3);">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('add-menu-dialog').close()">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan Menu</button>
+        </div>
+    </form>
+</dialog>
 
 <form method="GET" action="{{ route('owner.menu') }}" class="menu-filter">
     <label for="q" class="sr-only">Cari menu</label>
@@ -59,11 +94,11 @@
                         @endif
                     </td>
                     <td>
-                        <form method="POST" action="#" onsubmit="return false;" class="restock-form">
+                        <form method="POST" action="{{ route('owner.menu.restock', $menu->id) }}" class="restock-form">
                             @csrf
                             <label class="sr-only" for="restock-{{ $menu->id }}">Jumlah tambahan stok {{ $menu->name }}</label>
-                            <input id="restock-{{ $menu->id }}" type="number" min="1" max="999" value="1" name="amount" disabled>
-                            <button type="submit" class="btn btn-secondary btn-sm" disabled>Tambah</button>
+                            <input id="restock-{{ $menu->id }}" type="number" min="1" max="999" value="1" name="amount">
+                            <button type="submit" class="btn btn-secondary btn-sm">Tambah</button>
                         </form>
                     </td>
                 </tr>

@@ -7,6 +7,7 @@ if (dialog) {
     const priceEl = document.getElementById('menu-dialog-price');
     const stockEl = document.getElementById('menu-dialog-stock');
     const noteEl = document.getElementById('menu-dialog-note');
+    const idInput = document.getElementById('menu-dialog-id');
     const addBtn = document.getElementById('menu-dialog-add');
     const closeBtn = document.getElementById('menu-dialog-close');
 
@@ -15,12 +16,17 @@ if (dialog) {
             const data = trigger.dataset;
             const available = data.available === '1';
 
+            if (idInput && data.id) {
+                idInput.value = data.id;
+            }
             nameEl.textContent = data.name;
             descEl.textContent = data.description;
             priceEl.textContent = data.price;
             stockEl.textContent = available ? `Stok: ${data.stock}` : 'Habis';
             noteEl.hidden = available;
-            addBtn.disabled = true;
+            if (addBtn) {
+                addBtn.disabled = !available;
+            }
 
             if (typeof dialog.showModal === 'function') {
                 dialog.showModal();

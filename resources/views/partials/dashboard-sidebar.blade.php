@@ -52,7 +52,9 @@
 
     <div class="sidebar-footer">
         <p class="sidebar-user">{{ $account->name }}</p>
-        {{-- Ganti dengan form POST logout setelah autentikasi tersedia. --}}
-        <button type="button" class="sidebar-signout" disabled>Keluar</button>
+        <form method="POST" action="{{ route('logout') }}" style="margin:0;padding:0;">
+            @csrf
+            <button type="submit" class="sidebar-signout" style="cursor:pointer;border:none;background:none;width:100%;text-align:left;">Keluar</button>
+        </form>
     </div>
 </aside>

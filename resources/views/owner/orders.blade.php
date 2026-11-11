@@ -52,10 +52,26 @@
                 @if($order->customer_note)
                     <p class="text-sm text-muted">Catatan: {{ $order->customer_note }}</p>
                 @endif
-                <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
-                    <a href="{{ route('orders.show') }}" class="btn btn-secondary btn-sm">Lihat detail</a>
-                    {{-- Aktifkan setelah service workflow backend tersedia. --}}
-                    <button type="button" class="btn btn-primary btn-sm" disabled>{{ $tab['action'] }}</button>
+                <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;">
+                    <a href="{{ route('orders.show', ['order_code' => $order->order_code]) }}" class="btn btn-secondary btn-sm">Lihat detail</a>
+                    @if(isset($order->id))
+                        @if($key === 'awaiting')
+                            <form method="POST" action="{{ route('orders.payment', $order->id) }}" style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-primary btn-sm">{{ $tab['action'] }}</button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('orders.status', $order->id) }}" style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-primary btn-sm">{{ $tab['action'] }}</button>
+                            </form>
+                        @endif
+                    @else
+                        <button type="button" class="btn btn-primary btn-sm" disabled>{{ $tab['action'] }}</button>
+                    @endif
+                    <!-- disabled -->
                 </div>
             </article>
         @empty

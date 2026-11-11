@@ -14,5 +14,9 @@ if (form) {
         radio.addEventListener('change', updateFulfillment);
     });
     updateFulfillment();
-    form.addEventListener('submit', event => event.preventDefault());
+    form.addEventListener('submit', event => {
+        if (form.getAttribute('action') === '#' || form.hasAttribute('onsubmit')) {
+            event.preventDefault();
+        }
+    });
 }

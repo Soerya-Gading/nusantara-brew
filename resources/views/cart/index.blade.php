@@ -9,8 +9,23 @@
         <p class="text-muted">Periksa pilihan Anda sebelum melanjutkan pemesanan.</p>
     </header>
 
-    {{-- Backend akan memberikan $cart milik customer yang login.
-         Belum ada sumber data transaksi pada tahap frontend ini. --}}
+    @if(session('success'))
+        <div class="alert alert-success" style="margin-bottom: var(--space-4);">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('warning'))
+        <div class="alert alert-warning" style="margin-bottom: var(--space-4);">
+            {{ session('warning') }}
+        </div>
+    @endif
+    @if($errors->has('cart'))
+        <div class="alert alert-danger" style="margin-bottom: var(--space-4);">
+            {{ $errors->first('cart') }}
+        </div>
+    @endif
+
+    <!-- disabled -->
     @if(isset($cart) && $cart->items->isNotEmpty())
         <div class="cart-layout">
             <section class="card cart-panel" aria-labelledby="cart-shop">
@@ -24,12 +39,26 @@
                             @if($item->note)
                                 <p class="cart-item-note">{{ $item->note }}</p>
                             @endif
-                            {{-- Aktifkan tindakan setelah route cart backend tersedia. --}}
                             <div class="cart-item-actions">
-                                <label for="quantity-{{ $item->menu_id }}">Jumlah</label>
-                                <input id="quantity-{{ $item->menu_id }}" type="number" min="1" max="99" value="{{ $item->quantity }}" disabled>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled>Ubah catatan</button>
-                                <button type="button" class="btn btn-secondary btn-sm" disabled>Hapus</button>
+                                @if(request()->routeIs('preview.cart'))
+                                    <label for="quantity-{{ $item->menu_id ?? $loop->iteration }}">Jumlah</label>
+                                    <input id="quantity-{{ $item->menu_id ?? $loop->iteration }}" type="number" min="1" max="99" value="{{ $item->quantity }}" disabled>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled>Ubah catatan</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" disabled>Hapus</button>
+                                @else
+                                    <form method="POST" action="{{ route('cart.items.update', $item->id) }}" style="display:inline-flex;align-items:center;gap:var(--space-2);">
+                                        @csrf
+                                        @method('PATCH')
+                                        <label for="quantity-{{ $item->id }}">Jumlah</label>
+                                        <input id="quantity-{{ $item->id }}" name="quantity" type="number" min="1" max="99" value="{{ $item->quantity }}" style="width:70px;padding:4px 8px;border:1px solid var(--color-border);border-radius:var(--radius-sm);" onchange="this.form.submit()">
+                                        <input type="hidden" name="note" value="{{ $item->note }}">
+                                    </form>
+                                    <form method="POST" action="{{ route('cart.items.destroy', $item->id) }}" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-secondary btn-sm">Hapus</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                         <strong class="cart-line-total">Rp {{ number_format($item->unit_price * $item->quantity, 0, ',', '.') }}</strong>
@@ -43,7 +72,11 @@
                     <div><dt>Jumlah porsi</dt><dd>{{ $cart->items->sum('quantity') }}</dd></div>
                     <div class="cart-summary-total"><dt>Total</dt><dd>Rp {{ number_format($cart->total_amount, 0, ',', '.') }}</dd></div>
                 </dl>
-                <button type="button" class="btn btn-primary btn-block" disabled>Lanjut Checkout</button>
+                @if(request()->routeIs('preview.cart'))
+                    <button type="button" class="btn btn-primary btn-block" disabled>Lanjut Checkout</button>
+                @else
+                    <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-block" style="text-align:center;display:block;text-decoration:none;">Lanjut Checkout</a>
+                @endif
             </aside>
         </div>
     @else

@@ -35,12 +35,11 @@
             Saat ini form menggunakan action="#" dan tombol disabled agar
             tidak mengirim data ke URL maupun endpoint palsu.
         --}}
+        <!-- onsubmit="return false;" disabled -->
         <form
             method="POST"
-            action="#"
+            action="{{ route('login.attempt') }}"
             id="login-form"
-            novalidate
-            onsubmit="return false;"
         >
             @csrf
 
@@ -59,7 +58,6 @@
                     autocomplete="email"
                     required
                     aria-describedby="login-email-error"
-                    disabled
                 >
                 @error('email')
                     <span id="login-email-error" class="form-error" role="alert">{{ $message }}</span>
@@ -80,22 +78,15 @@
                     autocomplete="current-password"
                     required
                     aria-describedby="login-password-error"
-                    disabled
                 >
                 @error('password')
                     <span id="login-password-error" class="form-error" role="alert">{{ $message }}</span>
                 @enderror
             </div>
 
-            {{--
-                Tombol dinonaktifkan (disabled) sampai POST route dan controller
-                autentikasi tersedia. Hapus atribut `disabled` saat integrasi.
-            --}}
             <button
                 type="submit"
                 class="btn btn-primary btn-block btn-lg"
-                disabled
-                aria-disabled="true"
                 style="margin-top: var(--space-2);"
             >
                 Masuk
