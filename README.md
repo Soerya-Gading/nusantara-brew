@@ -192,7 +192,7 @@ docs/                    konsep sistem dan kontrak frontend–backend
 | Bagian | Penanggung jawab |
 |---|---|
 | Frontend Blade, CSS, pengujian tampilan | Soerya Gading Setya Pambayun |
-| Backend transaksi, database, model | — |
+| Backend transaksi, database, model | Syahfitrah Ramadhan Pratama Putra |
 | Akun, akses, CRUD pengelolaan, integrasi | — |
 
 ---
